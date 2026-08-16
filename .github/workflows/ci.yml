@@ -24,3 +24,6 @@ jobs:
 
       - name: Build
         run: dotnet build --no-restore --configuration Release
+
+      - name: Docker Build
+        run: docker build -t csharp-test-api .
