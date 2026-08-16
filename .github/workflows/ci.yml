@@ -37,3 +37,11 @@ jobs:
 
       - name: Docker Build
         run: docker build -t csharp-test-api .
+
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Push Docker image to ECR
+        run: |
+          docker tag csharp-test-api:latest ${{ vars.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/csharp-test-api:latest
+          docker push ${{ vars.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/csharp-test-api:latest
